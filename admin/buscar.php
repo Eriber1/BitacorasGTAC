@@ -235,7 +235,7 @@ $conn->close();
                             </div>
                             <div class="card-info-item">
                                 <span class="card-info-label">Fecha</span>
-                                <span class="card-info-value"><?php echo date('d/m/Y', strtotime($bitacora['fecha'])); ?></span>
+                                <span class="card-info-value"><?php echo htmlspecialchars($bitacora['fecha']); ?></span>
                             </div>
                             <div class="card-info-item">
                                 <span class="card-info-label">Brigada</span>

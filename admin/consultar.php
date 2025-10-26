@@ -184,7 +184,7 @@ $result = $conn->query($sql);
                             <td><?php echo htmlspecialchars($row['os']); ?></td>
                             <td><?php echo htmlspecialchars($row['cliente']); ?></td>
                             <td><?php echo htmlspecialchars($row['sitio']); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($row['fecha'])); ?></td>
+                            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
                             <td><?php echo htmlspecialchars($row['brigada']); ?></td>
                             <td>
                                 <a href="generar_pdf.php?id=<?php echo $row['id']; ?>" class="btn btn-pdf" target="_blank">📄 PDF</a>

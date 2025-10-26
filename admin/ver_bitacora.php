@@ -218,7 +218,7 @@ $conn->close();
                 </div>
                 <div class="info-item">
                     <span class="info-label">Fecha</span>
-                    <span class="info-value"><?php echo date('d/m/Y', strtotime($bitacora['fecha'])); ?></span>
+                    <span class="info-value"><?php echo htmlspecialchars($bitacora['fecha']); ?></span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Brigada</span>
@@ -278,7 +278,7 @@ $conn->close();
                 </div>
 
                 <div class="image-card">
-                    <div class="image-card-header">🏷️ Etiquetas Punta A</div>
+                    <div class="image-card-header">🏷️ Etiquetas</div>
                     <div class="image-card-body">
                         <?php if (!empty($bitacora['foto_etiquetas'])): ?>
                             <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_etiquetas']); ?>" alt="Etiquetas">
@@ -289,7 +289,7 @@ $conn->close();
                 </div>
 
                 <div class="image-card">
-                    <div class="image-card-header">📷 tiquetas Punta B</div>
+                    <div class="image-card-header">📷 Foto Extra</div>
                     <div class="image-card-body">
                         <?php if (!empty($bitacora['foto_extra'])): ?>
                             <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_extra']); ?>" alt="Extra">

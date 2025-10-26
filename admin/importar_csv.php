@@ -92,19 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                     }
                 }
                 
-                // Convertir fecha de DD/MM/YYYY a YYYY-MM-DD
+                // Fecha sin conversión - guardar tal cual viene del CSV
                 $fecha = trim($row['fecha']);
-                if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $fecha, $matches)) {
-                    // Formato DD/MM/YYYY
-                    $dia = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
-                    $mes = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
-                    $año = $matches[3];
-                    $fecha = "$año-$mes-$dia";
-                } elseif (preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $fecha)) {
-                    // Ya está en formato YYYY-MM-DD, no hacer nada
-                } else {
-                    throw new Exception("Formato de fecha inválido: $fecha (use DD/MM/YYYY o YYYY-MM-DD)");
-                }
                 
                 // Preparar datos con normalización de nombres
                 $os = isset($row['os']) ? trim($row['os']) : '';

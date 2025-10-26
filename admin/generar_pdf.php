@@ -232,7 +232,7 @@ $conn->close();
             
             <div class="info-cell full-width">
                 <span class="label">Fecha</span>
-                <span class="value"><?php echo date('d/m/Y', strtotime($bitacora['fecha'])); ?></span>
+                <span class="value"><?php echo htmlspecialchars($bitacora['fecha']); ?></span>
             </div>
         </div>
         
@@ -243,34 +243,17 @@ $conn->close();
             
             <div class="images-grid">
                 <?php
-                // Función para generar URL de imagen
+                // Función para generar URL de imagen usando proxy local
                 function getGoogleDriveImageUrl($fileId) {
                     if (empty($fileId)) return '';
-                    
-                    // Opción 1: Usar thumbnail API (prueba primero esta)
-                    return "https://drive.google.com/thumbnail?id=" . $fileId . "&sz=w1000";
-                    
-                    // Opción 2: Si no funciona, descomentar esta línea y comentar la anterior
-                    // return "proxy_imagen.php?id=" . urlencode($fileId);
+                    // Usar proxy local para evitar restricciones de Google Drive
+                    return "proxy_imagen.php?id=" . urlencode($fileId);
                 }
-                
-                // DEBUG: Mostrar IDs de fotos
-                echo "<!-- DEBUG INFO:\n";
-                echo "foto_clock_in: " . ($bitacora['foto_clock_in'] ?? 'NULL') . "\n";
-                echo "foto_clock_out: " . ($bitacora['foto_clock_out'] ?? 'NULL') . "\n";
-                echo "foto_etiquetas: " . ($bitacora['foto_etiquetas'] ?? 'NULL') . "\n";
-                echo "foto_extra: " . ($bitacora['foto_extra'] ?? 'NULL') . "\n";
-                
-                if (!empty($bitacora['foto_clock_in'])) {
-                    echo "URL Clock In: " . getGoogleDriveImageUrl($bitacora['foto_clock_in']) . "\n";
-                }
-                echo "-->\n";
                 ?>
                 
                 <div class="image-box">
                     <?php if (!empty($bitacora['foto_clock_in'])): ?>
                         <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_clock_in']); ?>" alt="Clock In">
-                        <!-- ID: <?php echo htmlspecialchars($bitacora['foto_clock_in']); ?> -->
                     <?php else: ?>
                         <span class="no-image">Sin imagen</span>
                     <?php endif; ?>
@@ -279,7 +262,6 @@ $conn->close();
                 <div class="image-box">
                     <?php if (!empty($bitacora['foto_clock_out'])): ?>
                         <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_clock_out']); ?>" alt="Clock Out">
-                        <!-- ID: <?php echo htmlspecialchars($bitacora['foto_clock_out']); ?> -->
                     <?php else: ?>
                         <span class="no-image">Sin imagen</span>
                     <?php endif; ?>
@@ -288,7 +270,6 @@ $conn->close();
                 <div class="image-box">
                     <?php if (!empty($bitacora['foto_etiquetas'])): ?>
                         <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_etiquetas']); ?>" alt="Etiquetas">
-                        <!-- ID: <?php echo htmlspecialchars($bitacora['foto_etiquetas']); ?> -->
                     <?php else: ?>
                         <span class="no-image">Sin imagen</span>
                     <?php endif; ?>
@@ -297,7 +278,6 @@ $conn->close();
                 <div class="image-box">
                     <?php if (!empty($bitacora['foto_extra'])): ?>
                         <img src="<?php echo getGoogleDriveImageUrl($bitacora['foto_extra']); ?>" alt="Extra">
-                        <!-- ID: <?php echo htmlspecialchars($bitacora['foto_extra']); ?> -->
                     <?php else: ?>
                         <span class="no-image">Sin imagen</span>
                     <?php endif; ?>

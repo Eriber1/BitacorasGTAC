@@ -208,6 +208,7 @@ $conn->close();
 
         <div class="menu">
             <a href="consultar.php">📋 Todas las Bitácoras</a>
+            <a href="importar_csv.php">📤 Importar CSV</a>
             <a href="../index.php">📝 Formulario Público</a>
             <a href="../logout.php" class="logout">🚪 Cerrar Sesión</a>
         </div>

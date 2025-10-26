@@ -158,6 +158,7 @@ $result = $conn->query($sql);
         <div class="menu">
             <a href="../index.php">📝 Formulario Público</a>
             <a href="buscar.php">🔎 Buscar</a>
+            <a href="importar_csv.php">📤 Importar CSV</a>
             <a href="../logout.php" class="logout">🚪 Cerrar Sesión</a>
         </div>
 

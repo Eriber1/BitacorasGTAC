@@ -171,13 +171,13 @@
         </div>
 
         <div class="menu">
-            <a href="index.php">🏠 Nueva Bitácora</a>
+            <!-- <a href="index.php">🏠 Nueva Bitácora</a> -->
             <a href="login.php">🔐 Acceso Administrativo</a>
         </div>
 
         <div id="mensaje"></div>
 
-        <form id="formBitacora" enctype="multipart/form-data">
+        <!-- <form id="formBitacora" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group">
                     <label for="os">OS *</label>
@@ -313,6 +313,6 @@
 
         // Establecer fecha actual por defecto
         document.getElementById('fecha').valueAsDate = new Date();
-    </script>
+    </script> -->
 </body>
 </html>

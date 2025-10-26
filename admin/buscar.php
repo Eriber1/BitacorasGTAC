@@ -208,6 +208,7 @@ $conn->close();
 
         <div class="menu">
             <a href="consultar.php">📋 Todas las Bitácoras</a>
+            <a href="importar_csv.php">📤 Importar CSV</a>
             <a href="../index.php">📝 Formulario Público</a>
             <a href="../logout.php" class="logout">🚪 Cerrar Sesión</a>
         </div>
@@ -234,7 +235,7 @@ $conn->close();
                             </div>
                             <div class="card-info-item">
                                 <span class="card-info-label">Fecha</span>
-                                <span class="card-info-value"><?php echo date('d/m/Y', strtotime($bitacora['fecha'])); ?></span>
+                                <span class="card-info-value"><?php echo htmlspecialchars($bitacora['fecha']); ?></span>
                             </div>
                             <div class="card-info-item">
                                 <span class="card-info-label">Brigada</span>

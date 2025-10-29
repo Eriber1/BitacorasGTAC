@@ -48,7 +48,7 @@ $conn->close();
             width: 210mm;
             height: 297mm;
             margin: 0 auto;
-            border: 2px solid #000;
+           border: none;
             padding: 0;
             box-sizing: border-box;
             display: flex;
@@ -62,7 +62,7 @@ $conn->close();
             background-color: #0077C8;
             color: white;
             padding: 12px 30px;
-            border: none;
+        border: 2px solid #000;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
@@ -95,7 +95,7 @@ $conn->close();
             background-color: white;
         }
         .logo {
-            height: 40px;
+            height: 100px;
             object-fit: contain;
         }
         .logo-gtac {
@@ -104,31 +104,34 @@ $conn->close();
         .logo-huawei {
             max-width: 130px;
         }
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-collapse: collapse;
-        }
-        .info-cell {
-            border: 1px solid #000;
-            padding: 4px 8px;
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-        }
-        .info-cell.full-width {
-            grid-column: 1 / -1;
-        }
-        .label {
-            font-weight: bold;
-            background-color: white;
-            padding-right: 10px;
-            white-space: nowrap;
-        }
-        .value {
-            flex: 1;
-            min-height: 20px;
-        }
+        
+/* INICIO: Reemplazo de estilos de info-grid */
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    border-top: 1px solid #000; /* Borde superior para la tabla */
+    border-bottom: 1px solid #000; /* Borde inferior para la tabla */
+}
+.info-table td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-top: 1px solid #000; /* Borde superior de celda (para líneas internas) */
+    border-bottom: 1px solid #000; /* Borde inferior de celda (para líneas internas) */
+    padding: 4px 8px;
+    height: 20px; /* Altura mínima */
+    vertical-align: middle;
+}
+.label-cell {
+    font-weight: bold;
+    white-space: nowrap;
+}
+.value-cell {
+   width: auto; /* La celda de valor ocupa el espacio restante */
+}
+/* FIN: Reemplazo de estilos */
+
+
         .content {
             display: flex;
             flex-direction: column;
@@ -180,7 +183,7 @@ $conn->close();
                 padding: 0;
             }
             .container {
-                border: 2px solid #000;
+               border: none;
                 page-break-after: avoid;
             }
             .content {
@@ -204,40 +207,46 @@ $conn->close();
             <img src="https://1000marcas.net/wp-content/uploads/2019/12/Huawei-Logo-768x432.png" alt="Huawei Logo" class="logo logo-huawei">
         </div>
 
-        <div class="info-grid">
-            <div class="info-cell">
-                <span class="label">OS</span>
-                <span class="value"><?php echo htmlspecialchars($bitacora['os']); ?></span>
-            </div>
-            <div class="info-cell">
-                <span class="label">Pagina No.</span>
-                <span class="value">1 de 1</span>
-            </div>
-            
-            <div class="info-cell">
-                <span class="label">Cliente</span>
-                <span class="value"><?php echo htmlspecialchars($bitacora['cliente']); ?></span>
-            </div>
-            <div class="info-cell">
-                <span class="label">Brigada</span>
-                <span class="value"><?php echo htmlspecialchars($bitacora['brigada']); ?></span>
-            </div>
-            
-            <div class="info-cell">
-                <span class="label">Sitio</span>
-                <span class="value"><?php echo htmlspecialchars($bitacora['sitio']); ?></span>
-            </div>
-            <div class="info-cell">
-                <span class="label">FM/NOC</span>
-                <span class="value"><?php echo htmlspecialchars($bitacora['fm_acceso'] ?? '') . ' / ' . htmlspecialchars($bitacora['noc_acceso'] ?? ''); ?></span>
-            </div>
-            
-            <div class="info-cell full-width">
-                <span class="label">Fecha</span>
-                <span class="value"><?php echo date('d/m/Y', strtotime($bitacora['fecha'])); ?></span>
-            </div>
-        </div>
         
+<table class="info-table">
+    <tr>
+        <td class="label-cell" style="width: 1%;">OS</td>
+        <td class="value-cell" style="padding-left: 2px; width: 50%;">
+            <?php echo htmlspecialchars($bitacora['os']); ?>
+        </td>
+        
+        <td class="value-cell" colspan="2" style="font-weight: bold; text-align: center;">
+            Pagina No. 1 de 1
+        </td>
+    </tr>
+    <tr>
+        <td class="label-cell" style="width: 1%;">Cliente</td>
+        <td class="value-cell" style="padding-left: 2px; width: 50%;">
+            <?php echo htmlspecialchars($bitacora['cliente']); ?>
+        </td>
+        
+        <td class="label-cell" colspan="2" style="text-align: center;">
+            Brigada
+        </td>
+    </tr>
+    <tr>
+        <td class="label-cell" style="width: 1%;">Sitio</td>
+        <td class="value-cell" style="padding-left: 2px; width: 50%;">
+            <?php echo htmlspecialchars($bitacora['sitio']); ?>
+        </td>
+        
+        <td class="value-cell" colspan="2" style="text-align: center;">
+            <?php echo htmlspecialchars($bitacora['brigada']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td class="label-cell" style="width: 1%;">Fecha</td>
+        <td class="value-cell" colspan="3" style="padding-left: 2px;">
+            <?php echo htmlspecialchars($bitacora['fecha']); ?>
+        </td>
+    </tr>
+</table>
+
         <div class="content">
             <div class="bitacora-section">
                 <div class="bitacora-text"><?php echo htmlspecialchars($bitacora['bitacora']); ?></div>

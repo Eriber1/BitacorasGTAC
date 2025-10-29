@@ -24,6 +24,15 @@ if ($result->num_rows === 0) {
 $bitacora = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
+
+// --- INICIO: Formatear fecha para el título ---
+// Tomamos la fecha de la base de datos (ej: "29/10/2025")
+$fecha_db = $bitacora['fecha']; 
+// Creamos un objeto de fecha especificando el formato original (día/mes/año)
+$date_obj = DateTime::createFromFormat('d/m/Y', $fecha_db);
+// Le damos el nuevo formato (ej: "20251029")
+$fecha_formateada = $date_obj->format('Ymd'); 
+// --- FIN: Formatear fecha ---
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +40,7 @@ $conn->close();
     <!-- titulo del documeto pdf  2025XXXX_BITACORA_SITIO_OS_XXXX -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitacora_<?php echo $bitacora['sitio']; ?>_OS_<?php echo $bitacora['os']; ?></title>
+   <title><?php echo $fecha_formateada; ?>_BITACORA_<?php echo $bitacora['sitio']; ?>_OS_<?php echo $bitacora['os']; ?></title>
     
     <style>
         body {
@@ -99,10 +108,10 @@ $conn->close();
             object-fit: contain;
         }
         .logo-gtac {
-            max-width: 250px;
+            max-width: 150px;
         }
         .logo-huawei {
-            max-width: 130px;
+            max-width: 100px;
         }
         
 /* INICIO: Reemplazo de estilos de info-grid */
